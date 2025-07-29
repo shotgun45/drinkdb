@@ -14,7 +14,7 @@ root.title("DrinkDB")
 root.geometry("1024x768")
 
 
-# Load data with absolute path
+# Load drinks.json
 import os
 try:
     script_dir = os.path.dirname(os.path.abspath(__file__))
