@@ -9,6 +9,7 @@ from drinkdb_gui import load_drinks
 test_json_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '../src/drinks.json'))
 
 class TestDrinkDB(unittest.TestCase):
+
     def test_load_drinks_returns_list(self):
         drinks = load_drinks(test_json_path)
         self.assertIsInstance(drinks, list)
@@ -31,6 +32,24 @@ class TestDrinkDB(unittest.TestCase):
         self.assertIn('Margarita', names)
         self.assertIn('Old Fashioned', names)
         self.assertIn('Cosmopolitan', names)
+
+    def test_no_duplicate_drink_names(self):
+        drinks = load_drinks(test_json_path)
+        names = [drink['name'] for drink in drinks]
+        self.assertEqual(len(names), len(set(names)), "Duplicate drink names found.")
+
+    def test_no_empty_ingredients(self):
+        drinks = load_drinks(test_json_path)
+        for drink in drinks:
+            self.assertTrue(len(drink['ingredients']) > 0, f"Drink '{drink['name']}' has no ingredients.")
+            for ing in drink['ingredients']:
+                self.assertTrue(ing['name'].strip(), f"Drink '{drink['name']}' has ingredient with empty name.")
+                self.assertTrue(ing['amount'].strip(), f"Drink '{drink['name']}' has ingredient with empty amount.")
+
+    def test_instructions_not_empty(self):
+        drinks = load_drinks(test_json_path)
+        for drink in drinks:
+            self.assertTrue(drink['instructions'].strip(), f"Drink '{drink['name']}' has empty instructions.")
 
 if __name__ == '__main__':
     unittest.main()
