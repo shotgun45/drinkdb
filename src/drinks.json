@@ -2,52 +2,129 @@
   {
     "name": "Mojito",
     "ingredients": [
-      {"name": "White Rum", "amount": "2 oz"},
-      {"name": "Sugar", "amount": "2 tsp"},
-      {"name": "Lime Juice", "amount": "1 oz"},
-      {"name": "Soda Water", "amount": "Top up"},
-      {"name": "Mint", "amount": "6 leaves"}
+      {
+        "name": "White Rum",
+        "amount": "2 oz"
+      },
+      {
+        "name": "Sugar",
+        "amount": "2 tsp"
+      },
+      {
+        "name": "Lime Juice",
+        "amount": "1 oz"
+      },
+      {
+        "name": "Soda Water",
+        "amount": "Top up"
+      },
+      {
+        "name": "Mint",
+        "amount": "6 leaves"
+      }
     ],
     "instructions": "Muddle mint leaves with sugar and lime juice. Add rum, fill glass with ice, top with soda water, and garnish with mint."
   },
   {
     "name": "Margarita",
     "ingredients": [
-      {"name": "Tequila", "amount": "2 oz"},
-      {"name": "Triple Sec", "amount": "1 oz"},
-      {"name": "Lime Juice", "amount": "1 oz"},
-      {"name": "Salt", "amount": "For rim"}
+      {
+        "name": "Tequila",
+        "amount": "2 oz"
+      },
+      {
+        "name": "Triple Sec",
+        "amount": "1 oz"
+      },
+      {
+        "name": "Lime Juice",
+        "amount": "1 oz"
+      },
+      {
+        "name": "Salt",
+        "amount": "For rim"
+      }
     ],
     "instructions": "Rim glass with salt. Shake tequila, triple sec, and lime juice with ice. Strain into glass and garnish with lime."
   },
   {
     "name": "Old Fashioned",
     "ingredients": [
-      {"name": "Bourbon or Rye Whiskey", "amount": "2 oz"},
-      {"name": "Sugar", "amount": "1 sugar cube"},
-      {"name": "Angostura Bitters", "amount": "2 dashes"},
-      {"name": "Orange Twist", "amount": "Garnish"}
+      {
+        "name": "Bourbon or Rye Whiskey",
+        "amount": "2 oz"
+      },
+      {
+        "name": "Sugar",
+        "amount": "1 sugar cube"
+      },
+      {
+        "name": "Angostura Bitters",
+        "amount": "2 dashes"
+      },
+      {
+        "name": "Orange Twist",
+        "amount": "Garnish"
+      }
     ],
     "instructions": "Muddle sugar and bitters, add whiskey and ice, stir, and garnish with orange twist."
   },
   {
     "name": "Cosmopolitan",
     "ingredients": [
-      {"name": "Vodka", "amount": "1.5 oz"},
-      {"name": "Triple Sec", "amount": "1 oz"},
-      {"name": "Cranberry Juice", "amount": "0.5 oz"},
-      {"name": "Lime Juice", "amount": "0.5 oz"}
+      {
+        "name": "Vodka",
+        "amount": "1.5 oz"
+      },
+      {
+        "name": "Triple Sec",
+        "amount": "1 oz"
+      },
+      {
+        "name": "Cranberry Juice",
+        "amount": "0.5 oz"
+      },
+      {
+        "name": "Lime Juice",
+        "amount": "0.5 oz"
+      }
     ],
     "instructions": "Shake all ingredients with ice, strain into a cocktail glass, and garnish with lime."
   },
-    {
-        "name": "Whiskey Sour",
-        "ingredients": [
-            {"name": "Bourbon", "amount": "2 oz"},
-            {"name": "Lemon Juice", "amount": "3/4 oz"},
-            {"name": "Simple Syrup", "amount": "1/2 oz"},
-            {"name": "Egg White", "amount": "Optional"}
-        ],
-        "instructions": "Shake all ingredients with ice, strain into a glass, and garnish with a cherry or lemon slice."
-    }
+  {
+    "name": "Whiskey Sour",
+    "ingredients": [
+      {
+        "name": "Bourbon",
+        "amount": "2 oz"
+      },
+      {
+        "name": "Lemon Juice",
+        "amount": "3/4 oz"
+      },
+      {
+        "name": "Simple Syrup",
+        "amount": "1/2 oz"
+      },
+      {
+        "name": "Egg White",
+        "amount": "Optional"
+      }
+    ],
+    "instructions": "Shake all ingredients with ice, strain into a glass, and garnish with a cherry or lemon slice."
+  },
+  {
+    "name": "Test Drink",
+    "ingredients": [
+      {
+        "name": "oz Test",
+        "amount": "1.5"
+      },
+      {
+        "name": "oz Lime",
+        "amount": "0.75"
+      }
+    ],
+    "instructions": "Test Test Test"
+  }
 ]
