@@ -112,19 +112,5 @@
       }
     ],
     "instructions": "Shake all ingredients with ice, strain into a glass, and garnish with a cherry or lemon slice."
-  },
-  {
-    "name": "Test Drink",
-    "ingredients": [
-      {
-        "name": "oz Test",
-        "amount": "1.5"
-      },
-      {
-        "name": "oz Lime",
-        "amount": "0.75"
-      }
-    ],
-    "instructions": "Test Test Test"
   }
 ]

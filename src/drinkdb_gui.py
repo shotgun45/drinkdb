@@ -139,8 +139,45 @@ def open_add_drink_window():
     tk.Button(btn_frame, text="Add Drink", command=add_drink).pack(side=tk.LEFT, padx=10)
     tk.Button(btn_frame, text="Cancel", command=add_win.destroy).pack(side=tk.LEFT, padx=10)
 
-# Add button to main window
-add_btn = ttk.Button(root, text="Add Drink", command=open_add_drink_window)
-add_btn.pack(pady=10)
+
+# Add and Delete buttons to main window
+btn_frame_main = tk.Frame(root)
+btn_frame_main.pack(pady=10)
+add_btn = ttk.Button(btn_frame_main, text="Add Drink", command=open_add_drink_window)
+add_btn.pack(side=tk.LEFT, padx=10)
+
+def delete_selected_drink():
+    global drinks_sorted
+    selection = drink_listbox.curselection()
+    if not selection:
+        messagebox.showwarning("No selection", "Please select a drink to delete.")
+        return
+    index = selection[0]
+    drink_to_delete = drinks_sorted[index]
+    confirm = messagebox.askyesno("Delete Drink", f"Are you sure you want to delete '{drink_to_delete['name']}'?")
+    if not confirm:
+        return
+    # Remove from drinks and update sorted list
+    drinks.remove(next(d for d in drinks if d['name'] == drink_to_delete['name']))
+    drinks_sorted = sorted(drinks, key=lambda d: d['name'].lower())
+    drink_listbox.delete(0, tk.END)
+    for drink in drinks_sorted:
+        drink_listbox.insert(tk.END, drink['name'])
+    # Save to JSON
+    try:
+        with open(drinks_path, 'w') as f:
+            json.dump(drinks, f, indent=2)
+    except Exception as e:
+        messagebox.showerror("Error", f"Failed to save to drinks.json: {e}")
+    # Clear details if nothing is selected
+    if not drinks_sorted:
+        ingredients_var.set("")
+        instructions_var.set("")
+    else:
+        drink_listbox.selection_set(0)
+        show_drink_details(None)
+
+delete_btn = ttk.Button(btn_frame_main, text="Delete Drink", command=delete_selected_drink)
+delete_btn.pack(side=tk.LEFT, padx=10)
 
 root.mainloop()
