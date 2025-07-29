@@ -39,5 +39,15 @@
       {"name": "Lime Juice", "amount": "0.5 oz"}
     ],
     "instructions": "Shake all ingredients with ice, strain into a cocktail glass, and garnish with lime."
-  }
+  },
+    {
+        "name": "Whiskey Sour",
+        "ingredients": [
+            {"name": "Bourbon", "amount": "2 oz"},
+            {"name": "Lemon Juice", "amount": "3/4 oz"},
+            {"name": "Simple Syrup", "amount": "1/2 oz"},
+            {"name": "Egg White", "amount": "Optional"}
+        ],
+        "instructions": "Shake all ingredients with ice, strain into a glass, and garnish with a cherry or lemon slice."
+    }
 ]
