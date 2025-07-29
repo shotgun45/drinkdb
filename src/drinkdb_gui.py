@@ -15,7 +15,7 @@ def show_drink_details(event):
     drink = drinks[index]
     # Ingredients
     ingredients_text = "\n".join([
-        f"- {ing['name']}: {ing['amount']}" for ing in drink['ingredients']
+        f"- {ing['amount']} {ing['name']}" for ing in drink['ingredients']
     ])
     # Instructions
     instructions_text = drink.get('instructions', 'No instructions provided.')
@@ -28,9 +28,13 @@ root = tk.Tk()
 root.title("DrinkDB - Drinks and Ingredients")
 root.geometry("500x400")
 
-# Load data
+
+# Load data with absolute path
+import os
 try:
-    drinks = load_drinks("drinks.json")
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    drinks_path = os.path.join(script_dir, "drinks.json")
+    drinks = load_drinks(drinks_path)
 except Exception as e:
     messagebox.showerror("Error", f"Failed to load drinks.json: {e}")
     root.destroy()
