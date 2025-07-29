@@ -10,7 +10,7 @@ def load_drinks(filename):
 
 # Main window
 root = tk.Tk()
-root.title("DrinkDB - Drinks and Ingredients")
+root.title("DrinkDB")
 root.geometry("1024x768")
 
 
