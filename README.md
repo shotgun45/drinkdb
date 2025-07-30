@@ -2,9 +2,7 @@
 # DrinkDB
 
 DrinkDB is a small Python application for storing the recipes of some of the most common and your favorite cocktails.
-
-
-
+![main screen](./docs/drinkdbmain.PNG)
 
 ## Installation
 
