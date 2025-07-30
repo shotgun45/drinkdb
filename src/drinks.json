@@ -112,5 +112,49 @@
       }
     ],
     "instructions": "Shake all ingredients with ice, strain into a glass, and garnish with a cherry or lemon slice."
+  },
+  {
+    "name": "Martini",
+    "ingredients": [
+      {
+        "name": "oz Gin",
+        "amount": "2.5"
+      },
+      {
+        "name": "oz Dry Vermouth",
+        "amount": "0.5"
+      },
+      {
+        "name": "dash Orange Bitters",
+        "amount": "1"
+      },
+      {
+        "name": "or 3 Olives",
+        "amount": "2"
+      }
+    ],
+    "instructions": "Add the gin, dry vermouth, and orange bitters into a mixing glass with ice and stir until very cold.\n\nStrain into a chilled cocktail glass.\n\nGarnish with olives."
+  },
+  {
+    "name": "Negroni",
+    "ingredients": [
+      {
+        "name": "oz Gin",
+        "amount": "1"
+      },
+      {
+        "name": "oz Campari",
+        "amount": "1"
+      },
+      {
+        "name": "oz Sweet Vermouth",
+        "amount": "1"
+      },
+      {
+        "name": "Orange Peel",
+        "amount": "1"
+      }
+    ],
+    "instructions": "Add the gin, Campari and sweet vermouth to a mixing glass filled with ice, and stir until well-chilled.\n\nStrain into a rocks glass over a large ice cube.\n\nGarnish with an orange peel. Optionally you can twist the orange peel over the glass prior to garnishing."
   }
 ]
