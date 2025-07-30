@@ -64,7 +64,7 @@ instructions_label.pack(anchor='w', padx=10)
 
 # Instructions text
 instructions_var = tk.StringVar()
-instructions_text = ttk.Label(root, textvariable=instructions_var, font=("Arial", 11), wraplength=460, justify='left')
+instructions_text = ttk.Label(root, textvariable=instructions_var, font=("Arial", 11), justify='left')
 instructions_text.pack(anchor='w', padx=20, pady=(0, 10))
 
 # Select first drink by default
@@ -111,7 +111,7 @@ def open_drink_form_window(title, drink=None, edit_index=None):
 
     # Instructions
     tk.Label(form_win, text="Instructions:").pack(anchor='w', padx=10, pady=(10, 0))
-    instructions_entry = tk.Text(form_win, width=40, height=4)
+    instructions_entry = tk.Text(form_win, width=40, height=4, wrap="word")
     instructions_entry.pack(padx=10, pady=2)
     if drink:
         instructions_entry.insert("1.0", drink['instructions'])

@@ -51,16 +51,16 @@
     "name": "Old Fashioned",
     "ingredients": [
       {
-        "name": "Bourbon or Rye Whiskey",
-        "amount": "2 oz"
+        "name": "oz Bourbon or Rye Whiskey",
+        "amount": "2"
       },
       {
-        "name": "Sugar",
-        "amount": "1 sugar cube"
+        "name": "cube Sugar",
+        "amount": "1"
       },
       {
-        "name": "Angostura Bitters",
-        "amount": "2 dashes"
+        "name": "dashes Angostura Bitters",
+        "amount": "2"
       },
       {
         "name": "Orange Twist",
