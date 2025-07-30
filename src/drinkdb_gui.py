@@ -202,7 +202,7 @@ drinks_menu = tk.Menu(menubar, tearoff=0)
 drinks_menu.add_command(label="Add Drink", command=open_add_drink_window)
 drinks_menu.add_command(label="Edit Drink", command=open_edit_drink_window)
 drinks_menu.add_command(label="Delete Drink", command=delete_selected_drink)
-menubar.add_cascade(label="Menu", menu=drinks_menu)
+menubar.add_cascade(label="Edit", menu=drinks_menu)
 root.config(menu=menubar)
 
 root.mainloop()
