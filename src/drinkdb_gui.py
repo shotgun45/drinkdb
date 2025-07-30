@@ -28,6 +28,7 @@ drinks_sorted = sorted(drinks, key=lambda d: d['name'].lower())
 ingredients_var = tk.StringVar()
 instructions_var = tk.StringVar()
 
+
 def show_drink_details(event):
     selection = drink_listbox.curselection()
     if not selection:
@@ -40,6 +41,7 @@ def show_drink_details(event):
     instructions_text = drink.get('instructions', 'No instructions provided.')
     ingredients_var.set(ingredients_text)
     instructions_var.set(instructions_text)
+
 
 drink_listbox = tk.Listbox(root, height=8, font=("Arial", 12))
 for drink in drinks_sorted:
@@ -84,6 +86,7 @@ def open_edit_drink_window():
     index = selection[0]
     drink = drinks_sorted[index]
     open_drink_form_window("Edit Drink", drink, index)
+
 
 def open_drink_form_window(title, drink=None, edit_index=None):
     form_win = tk.Toplevel(root)
@@ -158,6 +161,7 @@ def open_drink_form_window(title, drink=None, edit_index=None):
     btn_frame.pack(pady=20)
     tk.Button(btn_frame, text="Save", command=save_drink).pack(side=tk.LEFT, padx=10)
     tk.Button(btn_frame, text="Cancel", command=form_win.destroy).pack(side=tk.LEFT, padx=10)
+
 
 def delete_selected_drink():
     global drinks_sorted

@@ -8,6 +8,7 @@ from drink_utils import load_drinks
 
 test_json_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '../src/drinks.json'))
 
+
 class TestDrinkDB(unittest.TestCase):
 
     def test_json_file_is_valid(self):
@@ -66,6 +67,7 @@ class TestDrinkDB(unittest.TestCase):
         drinks = load_drinks(test_json_path)
         for drink in drinks:
             self.assertTrue(drink['instructions'].strip(), f"Drink '{drink['name']}' has empty instructions.")
+
 
 if __name__ == '__main__':
     unittest.main()
