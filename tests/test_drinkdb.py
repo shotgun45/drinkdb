@@ -4,7 +4,7 @@ import sys
 import json
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../src')))
-from drinkdb_gui import load_drinks
+from drink_utils import load_drinks
 
 test_json_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '../src/drinks.json'))
 

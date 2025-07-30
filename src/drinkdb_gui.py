@@ -1,18 +1,13 @@
+
 import json
 import tkinter as tk
 from tkinter import ttk, messagebox
-
-# Load drinks data from JSON file
-def load_drinks(filename):
-    with open(filename, 'r') as f:
-        return json.load(f)
-
+from drink_utils import load_drinks
 
 # Main window
 root = tk.Tk()
 root.title("DrinkDB")
 root.geometry("1024x768")
-
 
 # Load drinks.json
 import os
@@ -27,11 +22,9 @@ except Exception as e:
 
 drink_listbox = tk.Listbox(root, height=8, font=("Arial", 12))
 
-
 # Alphabetize drinks by name
 drinks_sorted = sorted(drinks, key=lambda d: d['name'].lower())
 
-# Ingredients and instructions variables must be defined before the callback
 ingredients_var = tk.StringVar()
 instructions_var = tk.StringVar()
 
@@ -79,27 +72,47 @@ if drinks_sorted:
 
 
 # --- Add Drink Functionality ---
+
 def open_add_drink_window():
-    add_win = tk.Toplevel(root)
-    add_win.title("Add New Drink")
-    add_win.geometry("400x500")
+    open_drink_form_window("Add New Drink")
+
+def open_edit_drink_window():
+    selection = drink_listbox.curselection()
+    if not selection:
+        messagebox.showwarning("No selection", "Please select a drink to edit.")
+        return
+    index = selection[0]
+    drink = drinks_sorted[index]
+    open_drink_form_window("Edit Drink", drink, index)
+
+def open_drink_form_window(title, drink=None, edit_index=None):
+    form_win = tk.Toplevel(root)
+    form_win.title(title)
+    form_win.geometry("400x500")
 
     # Drink name
-    tk.Label(add_win, text="Drink Name:").pack(anchor='w', padx=10, pady=(10,0))
-    name_entry = tk.Entry(add_win, width=40)
+    tk.Label(form_win, text="Drink Name:").pack(anchor='w', padx=10, pady=(10,0))
+    name_entry = tk.Entry(form_win, width=40)
     name_entry.pack(padx=10, pady=2)
-
-    # Instructions
-    tk.Label(add_win, text="Instructions:").pack(anchor='w', padx=10, pady=(10,0))
-    instructions_entry = tk.Text(add_win, width=40, height=4)
-    instructions_entry.pack(padx=10, pady=2)
+    if drink:
+        name_entry.insert(0, drink['name'])
 
     # Ingredients
-    tk.Label(add_win, text="Ingredients (one per line, format: amount ingredient):").pack(anchor='w', padx=10, pady=(10,0))
-    ingredients_text = tk.Text(add_win, width=40, height=8)
+    tk.Label(form_win, text="Ingredients (one per line, format: amount ingredient):").pack(anchor='w', padx=10, pady=(10,0))
+    ingredients_text = tk.Text(form_win, width=40, height=8)
     ingredients_text.pack(padx=10, pady=2)
+    if drink:
+        ingredients_lines = [f"{ing['amount']} {ing['name']}" for ing in drink['ingredients']]
+        ingredients_text.insert("1.0", "\n".join(ingredients_lines))
 
-    def add_drink():
+    # Instructions
+    tk.Label(form_win, text="Instructions:").pack(anchor='w', padx=10, pady=(10,0))
+    instructions_entry = tk.Text(form_win, width=40, height=4)
+    instructions_entry.pack(padx=10, pady=2)
+    if drink:
+        instructions_entry.insert("1.0", drink['instructions'])
+
+    def save_drink():
         name = name_entry.get().strip()
         instructions = instructions_entry.get("1.0", tk.END).strip()
         ingredients_lines = ingredients_text.get("1.0", tk.END).strip().splitlines()
@@ -117,11 +130,18 @@ def open_add_drink_window():
                 return
             amount, ing_name = parts
             ingredients.append({"name": ing_name, "amount": amount})
-        # Add to drinks list
-        new_drink = {"name": name, "ingredients": ingredients, "instructions": instructions}
-        drinks.append(new_drink)
-        # Re-sort and update display
         global drinks_sorted
+        if edit_index is not None:
+            # Find the original drink in the unsorted list and update it
+            orig_name = drinks_sorted[edit_index]['name']
+            for i, d in enumerate(drinks):
+                if d['name'] == orig_name:
+                    drinks[i] = {"name": name, "ingredients": ingredients, "instructions": instructions}
+                    break
+        else:
+            # Add new drink
+            drinks.append({"name": name, "ingredients": ingredients, "instructions": instructions})
+        # Re-sort and update display
         drinks_sorted = sorted(drinks, key=lambda d: d['name'].lower())
         drink_listbox.delete(0, tk.END)
         for drink in drinks_sorted:
@@ -132,19 +152,12 @@ def open_add_drink_window():
                 json.dump(drinks, f, indent=2)
         except Exception as e:
             messagebox.showerror("Error", f"Failed to save to drinks.json: {e}")
-        add_win.destroy()
+        form_win.destroy()
 
-    btn_frame = tk.Frame(add_win)
+    btn_frame = tk.Frame(form_win)
     btn_frame.pack(pady=20)
-    tk.Button(btn_frame, text="Add Drink", command=add_drink).pack(side=tk.LEFT, padx=10)
-    tk.Button(btn_frame, text="Cancel", command=add_win.destroy).pack(side=tk.LEFT, padx=10)
-
-
-# Add and Delete buttons to main window
-btn_frame_main = tk.Frame(root)
-btn_frame_main.pack(pady=10)
-add_btn = ttk.Button(btn_frame_main, text="Add Drink", command=open_add_drink_window)
-add_btn.pack(side=tk.LEFT, padx=10)
+    tk.Button(btn_frame, text="Save", command=save_drink).pack(side=tk.LEFT, padx=10)
+    tk.Button(btn_frame, text="Cancel", command=form_win.destroy).pack(side=tk.LEFT, padx=10)
 
 def delete_selected_drink():
     global drinks_sorted
@@ -177,7 +190,13 @@ def delete_selected_drink():
         drink_listbox.selection_set(0)
         show_drink_details(None)
 
-delete_btn = ttk.Button(btn_frame_main, text="Delete Drink", command=delete_selected_drink)
-delete_btn.pack(side=tk.LEFT, padx=10)
+# Menu
+menubar = tk.Menu(root)
+drinks_menu = tk.Menu(menubar, tearoff=0)
+drinks_menu.add_command(label="Add Drink", command=open_add_drink_window)
+drinks_menu.add_command(label="Edit Drink", command=open_edit_drink_window)
+drinks_menu.add_command(label="Delete Drink", command=delete_selected_drink)
+menubar.add_cascade(label="Drinks", menu=drinks_menu)
+root.config(menu=menubar)
 
 root.mainloop()
