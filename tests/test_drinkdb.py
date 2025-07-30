@@ -10,6 +10,22 @@ test_json_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '../src
 
 class TestDrinkDB(unittest.TestCase):
 
+    def test_json_file_is_valid(self):
+        # Ensure the JSON file is valid and can be loaded directly
+        with open(test_json_path, 'r') as f:
+            try:
+                data = json.load(f)
+            except Exception as e:
+                self.fail(f"drinks.json is not valid JSON: {e}")
+            self.assertIsInstance(data, list)
+
+    def test_drink_and_ingredient_names_nonempty(self):
+        drinks = load_drinks(test_json_path)
+        for drink in drinks:
+            self.assertTrue(isinstance(drink['name'], str) and drink['name'].strip(), f"Drink has empty or invalid name: {drink}")
+            for ing in drink['ingredients']:
+                self.assertTrue(isinstance(ing['name'], str) and ing['name'].strip(), f"Ingredient has empty or invalid name: {ing}")
+
     def test_load_drinks_returns_list(self):
         drinks = load_drinks(test_json_path)
         self.assertIsInstance(drinks, list)
