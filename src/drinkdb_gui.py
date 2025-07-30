@@ -56,7 +56,7 @@ ingredients_label.pack(anchor='w', padx=10)
 # Ingredients text
 ingredients_var = tk.StringVar()
 ingredients_text = ttk.Label(root, textvariable=ingredients_var, font=("Arial", 11), justify='left')
-ingredients_text.pack(anchor='w', padx=20, pady=(0,10))
+ingredients_text.pack(anchor='w', padx=20, pady=(0, 10))
 
 # Instructions label
 instructions_label = ttk.Label(root, text="Instructions:", font=("Arial", 11, "bold"))
@@ -65,7 +65,7 @@ instructions_label.pack(anchor='w', padx=10)
 # Instructions text
 instructions_var = tk.StringVar()
 instructions_text = ttk.Label(root, textvariable=instructions_var, font=("Arial", 11), wraplength=460, justify='left')
-instructions_text.pack(anchor='w', padx=20, pady=(0,10))
+instructions_text.pack(anchor='w', padx=20, pady=(0, 10))
 
 # Select first drink by default
 if drinks_sorted:
@@ -77,6 +77,7 @@ if drinks_sorted:
 
 def open_add_drink_window():
     open_drink_form_window("Add New Drink")
+
 
 def open_edit_drink_window():
     selection = drink_listbox.curselection()
@@ -94,14 +95,14 @@ def open_drink_form_window(title, drink=None, edit_index=None):
     form_win.geometry("400x500")
 
     # Drink name
-    tk.Label(form_win, text="Drink Name:").pack(anchor='w', padx=10, pady=(10,0))
+    tk.Label(form_win, text="Drink Name:").pack(anchor='w', padx=10, pady=(10, 0))
     name_entry = tk.Entry(form_win, width=40)
     name_entry.pack(padx=10, pady=2)
     if drink:
         name_entry.insert(0, drink['name'])
 
     # Ingredients
-    tk.Label(form_win, text="Ingredients (one per line, format: amount ingredient):").pack(anchor='w', padx=10, pady=(10,0))
+    tk.Label(form_win, text="Ingredients (one per line, format: amount ingredient):").pack(anchor='w', padx=10, pady=(10, 0))
     ingredients_text = tk.Text(form_win, width=40, height=8)
     ingredients_text.pack(padx=10, pady=2)
     if drink:
@@ -109,7 +110,7 @@ def open_drink_form_window(title, drink=None, edit_index=None):
         ingredients_text.insert("1.0", "\n".join(ingredients_lines))
 
     # Instructions
-    tk.Label(form_win, text="Instructions:").pack(anchor='w', padx=10, pady=(10,0))
+    tk.Label(form_win, text="Instructions:").pack(anchor='w', padx=10, pady=(10, 0))
     instructions_entry = tk.Text(form_win, width=40, height=4)
     instructions_entry.pack(padx=10, pady=2)
     if drink:
@@ -193,6 +194,7 @@ def delete_selected_drink():
     else:
         drink_listbox.selection_set(0)
         show_drink_details(None)
+
 
 # Menu
 menubar = tk.Menu(root)
