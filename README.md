@@ -5,6 +5,7 @@ DrinkDB is a small Python application for storing the recipes of some of the mos
 ![main screen](./docs/drinkdbmain.PNG)
 
 ## Installation
+As of this time I have confirmed the app will run on MacOS and Linux. Windows testing has only been done in WSL with Ubuntu. I will try running on Windows natively at a later time.
 
 1.) Install Python
 ```
