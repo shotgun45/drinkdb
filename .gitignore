@@ -207,4 +207,4 @@ marimo/_lsp/
 __marimo__/
 
 # Ignore contents of the backups directory
-backups/*
+src/backups/*.json
