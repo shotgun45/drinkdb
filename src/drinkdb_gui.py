@@ -196,12 +196,30 @@ def delete_selected_drink():
         show_drink_details(None)
 
 
+
+# Toolbar with Backup button
+def backup_json():
+    import shutil
+    import datetime
+    backup_dir = os.path.join(script_dir, "backups")
+    os.makedirs(backup_dir, exist_ok=True)
+    timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
+    backup_path = os.path.join(backup_dir, f"drinks_backup_{timestamp}.json")
+    try:
+        shutil.copy2(drinks_path, backup_path)
+        messagebox.showinfo("Backup Successful", f"Backup created at:\n{backup_path}")
+    except Exception as e:
+        messagebox.showerror("Backup Failed", f"Could not backup drinks.json: {e}")
+
+
 # Menu
 menubar = tk.Menu(root)
 drinks_menu = tk.Menu(menubar, tearoff=0)
 drinks_menu.add_command(label="Add Drink", command=open_add_drink_window)
 drinks_menu.add_command(label="Edit Drink", command=open_edit_drink_window)
 drinks_menu.add_command(label="Delete Drink", command=delete_selected_drink)
+drinks_menu.add_separator()
+drinks_menu.add_command(label="Backup JSON", command=backup_json)
 menubar.add_cascade(label="Edit", menu=drinks_menu)
 root.config(menu=menubar)
 
