@@ -38,5 +38,5 @@ sudo apt-get install python3-tk (Debian/Ubuntu)
 ```
 python3 main.py
 ```
-## Known Issues
-- Pulling the main branch after cloning has the potential to overwrite your saved cocktails. I am currently working on a way to backup or merge the lists to prevent the loss of user defined data.
+## Updates
+- 2025.08.02 - Added ability to backup and restore the cocktail data file.
