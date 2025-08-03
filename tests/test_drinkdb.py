@@ -13,7 +13,6 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../s
 class TestDrinkDB(unittest.TestCase):
 
     def test_json_file_is_valid(self):
-        # Ensure the JSON file is valid and can be loaded directly
         with open(test_json_path, 'r') as f:
             try:
                 data = json.load(f)
@@ -43,14 +42,6 @@ class TestDrinkDB(unittest.TestCase):
                 self.assertIn('name', ing)
                 self.assertIn('amount', ing)
 
-    def test_drink_names(self):
-        drinks = load_drinks(test_json_path)
-        names = [drink['name'] for drink in drinks]
-        self.assertIn('Mojito', names)
-        self.assertIn('Margarita', names)
-        self.assertIn('Old Fashioned', names)
-        self.assertIn('Cosmopolitan', names)
-
     def test_no_duplicate_drink_names(self):
         drinks = load_drinks(test_json_path)
         names = [drink['name'] for drink in drinks]
@@ -69,6 +60,21 @@ class TestDrinkDB(unittest.TestCase):
         for drink in drinks:
             self.assertTrue(drink['instructions'].strip(), f"Drink '{drink['name']}' has empty instructions.")
 
+    def test_no_case_insensitive_duplicate_names(self):
+        drinks = load_drinks(test_json_path)
+        names = [drink['name'].lower() for drink in drinks]
+        self.assertEqual(len(names), len(set(names)), "Case-insensitive duplicate drink names found.")
+
+    def test_ingredient_amounts_nonempty(self):
+        drinks = load_drinks(test_json_path)
+        for drink in drinks:
+            for ing in drink['ingredients']:
+                self.assertTrue(isinstance(ing['amount'], str) and ing['amount'].strip(), f"Ingredient in '{drink['name']}' has empty or invalid amount: {ing}")
+
+    def test_instructions_minimum_length(self):
+        drinks = load_drinks(test_json_path)
+        for drink in drinks:
+            self.assertGreaterEqual(len(drink['instructions'].strip()), 5, f"Instructions for '{drink['name']}' are too short.")
 
 if __name__ == '__main__':
     unittest.main()

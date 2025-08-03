@@ -117,12 +117,28 @@ def open_drink_form_window(title, drink=None, edit_index=None):
         instructions_entry.insert("1.0", drink['instructions'])
 
     def save_drink():
+        global drinks_sorted
         name = name_entry.get().strip()
         instructions = instructions_entry.get("1.0", tk.END).strip()
         ingredients_lines = ingredients_text.get("1.0", tk.END).strip().splitlines()
         if not name or not ingredients_lines:
             messagebox.showerror("Error", "Drink name and at least one ingredient are required.")
             return
+        # Prevent duplicate names
+        lower_name = name.lower()
+        existing_names = [d['name'].lower() for d in drinks]
+        if edit_index is not None:
+            orig_name = drinks_sorted[edit_index]['name']
+            orig_name_lower = orig_name.lower()
+            # Remove the original name from the list for edit
+            filtered_names = [n for n in existing_names if n != orig_name_lower]
+            if lower_name in filtered_names:
+                messagebox.showerror("Error", f"A drink named '{name}' already exists.")
+                return
+        else:
+            if lower_name in existing_names:
+                messagebox.showerror("Error", f"A drink named '{name}' already exists.")
+                return
         # Parse ingredients
         ingredients = []
         for line in ingredients_lines:
@@ -134,7 +150,6 @@ def open_drink_form_window(title, drink=None, edit_index=None):
                 return
             amount, ing_name = parts
             ingredients.append({"name": ing_name, "amount": amount})
-        global drinks_sorted
         if edit_index is not None:
             # Find the original drink in the unsorted list and update it
             orig_name = drinks_sorted[edit_index]['name']
