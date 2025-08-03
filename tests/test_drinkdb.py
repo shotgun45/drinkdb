@@ -76,5 +76,6 @@ class TestDrinkDB(unittest.TestCase):
         for drink in drinks:
             self.assertGreaterEqual(len(drink['instructions'].strip()), 5, f"Instructions for '{drink['name']}' are too short.")
 
+
 if __name__ == '__main__':
     unittest.main()
