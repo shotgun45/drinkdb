@@ -211,9 +211,7 @@ def delete_selected_drink():
         show_drink_details(None)
 
 
-
 # Toolbar with Backup button
-
 def backup_json():
     import shutil
     import datetime
@@ -226,6 +224,7 @@ def backup_json():
         messagebox.showinfo("Backup Successful", f"Backup created at:\n{backup_path}")
     except Exception as e:
         messagebox.showerror("Backup Failed", f"Could not backup drinks.json: {e}")
+
 
 def restore_from_backup():
     import shutil
