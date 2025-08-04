@@ -39,5 +39,6 @@ sudo apt-get install python3-tk (Debian/Ubuntu)
 python3 main.py
 ```
 ## Updates
+- 2025.08.04 - Move backup actions to its own menu option.
 - 2025.08.03 - Prevent users from entering duplicate cocktail names.
 - 2025.08.02 - Added ability to backup and restore the cocktail data file.
