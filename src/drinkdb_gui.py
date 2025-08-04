@@ -1,4 +1,3 @@
-
 import json
 import tkinter as tk
 from tkinter import ttk, messagebox
@@ -248,16 +247,31 @@ def restore_from_backup():
         messagebox.showerror("Restore Failed", f"Could not restore drinks.json: {e}")
 
 
-# Menu
+def show_about():
+    messagebox.showinfo("About DrinkDB", "DrinkDB\nVersion 1.0\nA simple drink recipe manager.")
+
+
+# Edit Drinks
 menubar = tk.Menu(root)
 drinks_menu = tk.Menu(menubar, tearoff=0)
 drinks_menu.add_command(label="Add Drink", command=open_add_drink_window)
 drinks_menu.add_command(label="Edit Drink", command=open_edit_drink_window)
 drinks_menu.add_command(label="Delete Drink", command=delete_selected_drink)
-drinks_menu.add_separator()
-drinks_menu.add_command(label="Backup JSON", command=backup_json)
-drinks_menu.add_command(label="Restore from Backup", command=restore_from_backup)
+
+
+# Help
+help_menu = tk.Menu(menubar, tearoff=0)
+help_menu.add_command(label="About", command=show_about)
+
+#Backup Drink List
+backup_menu = tk.Menu(menubar, tearoff=0)
+backup_menu.add_command(label="Backup JSON", command=backup_json)
+backup_menu.add_command(label="Restore from Backup", command=restore_from_backup)
+
+
 menubar.add_cascade(label="Edit", menu=drinks_menu)
+menubar.add_cascade(label="Backup", menu=backup_menu)
+menubar.add_cascade(label="Help", menu=help_menu)
 root.config(menu=menubar)
 
 root.mainloop()
