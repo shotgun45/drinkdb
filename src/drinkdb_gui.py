@@ -263,7 +263,7 @@ drinks_menu.add_command(label="Delete Drink", command=delete_selected_drink)
 help_menu = tk.Menu(menubar, tearoff=0)
 help_menu.add_command(label="About", command=show_about)
 
-#Backup Drink List
+# Backup Drink List
 backup_menu = tk.Menu(menubar, tearoff=0)
 backup_menu.add_command(label="Backup JSON", command=backup_json)
 backup_menu.add_command(label="Restore from Backup", command=restore_from_backup)
