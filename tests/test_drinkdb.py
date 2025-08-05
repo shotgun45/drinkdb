@@ -86,5 +86,6 @@ class TestDrinkDB(unittest.TestCase):
         invalid = 'hello\u20ac'  # Euro sign is 8364
         self.assertFalse(is_extended_ascii(invalid), "Filter should not allow non-ASCII (>255) characters")
 
+
 if __name__ == '__main__':
     unittest.main()
