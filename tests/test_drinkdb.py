@@ -9,10 +9,10 @@ from drink_utils import load_drinks
 test_json_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '../src/drinks.json'))
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../src')))
 
-from drink_utils import load_drinks
 
 class TestDrinkDB(unittest.TestCase):
     sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../src')))
+
     def test_json_file_is_valid(self):
         with open(test_json_path, 'r') as f:
             try:
@@ -70,7 +70,7 @@ class TestDrinkDB(unittest.TestCase):
                     ing['amount'].strip(),
                     f"Drink '{drink['name']}' has ingredient with empty amount."
                 )
-                
+
     def test_instructions_not_empty(self):
         drinks = load_drinks(test_json_path)
         for drink in drinks:
