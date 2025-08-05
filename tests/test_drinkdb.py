@@ -23,9 +23,15 @@ class TestDrinkDB(unittest.TestCase):
     def test_drink_and_ingredient_names_nonempty(self):
         drinks = load_drinks(test_json_path)
         for drink in drinks:
-            self.assertTrue(isinstance(drink['name'], str) and drink['name'].strip(), f"Drink has empty or invalid name: {drink}")
+            self.assertTrue(
+                isinstance(drink['name'], str) and drink['name'].strip(),
+                f"Drink has empty or invalid name: {drink}"
+            )
             for ing in drink['ingredients']:
-                self.assertTrue(isinstance(ing['name'], str) and ing['name'].strip(), f"Ingredient has empty or invalid name: {ing}")
+                self.assertTrue(
+                    isinstance(ing['name'], str) and ing['name'].strip(),
+                    f"Ingredient has empty or invalid name: {ing}"
+                )
 
     def test_load_drinks_returns_list(self):
         drinks = load_drinks(test_json_path)
@@ -50,10 +56,19 @@ class TestDrinkDB(unittest.TestCase):
     def test_no_empty_ingredients(self):
         drinks = load_drinks(test_json_path)
         for drink in drinks:
-            self.assertTrue(len(drink['ingredients']) > 0, f"Drink '{drink['name']}' has no ingredients.")
+            self.assertTrue(
+                len(drink['ingredients']) > 0,
+                f"Drink '{drink['name']}' has no ingredients."
+            )
             for ing in drink['ingredients']:
-                self.assertTrue(ing['name'].strip(), f"Drink '{drink['name']}' has ingredient with empty name.")
-                self.assertTrue(ing['amount'].strip(), f"Drink '{drink['name']}' has ingredient with empty amount.")
+                self.assertTrue(
+                    ing['name'].strip(),
+                    f"Drink '{drink['name']}' has ingredient with empty name."
+                )
+                self.assertTrue(
+                    ing['amount'].strip(),
+                    f"Drink '{drink['name']}' has ingredient with empty amount."
+                )
 
     def test_instructions_not_empty(self):
         drinks = load_drinks(test_json_path)
@@ -69,12 +84,19 @@ class TestDrinkDB(unittest.TestCase):
         drinks = load_drinks(test_json_path)
         for drink in drinks:
             for ing in drink['ingredients']:
-                self.assertTrue(isinstance(ing['amount'], str) and ing['amount'].strip(), f"Ingredient in '{drink['name']}' has empty or invalid amount: {ing}")
+                self.assertTrue(
+                    isinstance(ing['amount'], str) and ing['amount'].strip(),
+                    f"Ingredient in '{drink['name']}' has empty or invalid amount: {ing}"
+                )
 
     def test_instructions_minimum_length(self):
         drinks = load_drinks(test_json_path)
         for drink in drinks:
-            self.assertGreaterEqual(len(drink['instructions'].strip()), 5, f"Instructions for '{drink['name']}' are too short.")
+            self.assertGreaterEqual(
+                len(drink['instructions'].strip()),
+                5,
+                f"Instructions for '{drink['name']}' are too short."
+            )
 
     def test_filter_allows_only_extended_ascii(self):
         def is_extended_ascii(s):
