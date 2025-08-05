@@ -156,5 +156,45 @@
       }
     ],
     "instructions": "Add the gin, Campari and sweet vermouth to a mixing glass filled with ice, and stir until well-chilled.\n\nStrain into a rocks glass over a large ice cube.\n\nGarnish with an orange peel. Optionally you can twist the orange peel over the glass prior to garnishing."
+  },
+  {
+    "name": "Manhattan",
+    "ingredients": [
+      {
+        "name": "oz rye whiskey",
+        "amount": "2"
+      },
+      {
+        "name": "oz sweet vermouth",
+        "amount": "1"
+      },
+      {
+        "name": "dashes Angostura bitters",
+        "amount": "2"
+      },
+      {
+        "name": "Brandied cherry",
+        "amount": "1"
+      }
+    ],
+    "instructions": "Add the rye whiskey, sweet vermouth, and bitters into a mixing glass with ice and stir until well-chilled.\n\nStrain into a chilled Nick & Nora or coupe glass.\n\nGarnish with a brandied cherry"
+  },
+  {
+    "name": "White Russian",
+    "ingredients": [
+      {
+        "name": "oz vodka",
+        "amount": "2"
+      },
+      {
+        "name": "oz Kahl\u00faa",
+        "amount": "1"
+      },
+      {
+        "name": "oz Heavy cream",
+        "amount": "1"
+      }
+    ],
+    "instructions": "Add the vodka and Kahl\u00faa to a rocks glass filled with ice.\n\nTop with the heavy cream and stir."
   }
 ]

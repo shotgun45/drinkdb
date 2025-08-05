@@ -19,7 +19,7 @@ except Exception as e:
     root.destroy()
     exit()
 
-drink_listbox = tk.Listbox(root, height=8, font=("Arial", 12))
+drink_listbox = tk.Listbox(root, height=12, width=28, font=("Arial", 12))
 
 # Alphabetize drinks by name
 drinks_sorted = sorted(drinks, key=lambda d: d['name'].lower())
@@ -42,7 +42,7 @@ def show_drink_details(event):
     instructions_var.set(instructions_text)
 
 
-drink_listbox = tk.Listbox(root, height=8, font=("Arial", 12))
+drink_listbox = tk.Listbox(root, height=12, width=28, font=("Arial", 12))
 for drink in drinks_sorted:
     drink_listbox.insert(tk.END, drink['name'])
 drink_listbox.pack(fill=tk.X, padx=10, pady=10)
