@@ -7,11 +7,9 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../s
 from drink_utils import load_drinks
 
 test_json_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '../src/drinks.json'))
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../src')))
 
 
 class TestDrinkDB(unittest.TestCase):
-    sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../src')))
 
     def test_json_file_is_valid(self):
         with open(test_json_path, 'r') as f:
