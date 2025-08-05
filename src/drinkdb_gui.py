@@ -21,8 +21,44 @@ except Exception as e:
 
 drink_listbox = tk.Listbox(root, height=12, width=28, font=("Arial", 12))
 
+
 # Alphabetize drinks by name
 drinks_sorted = sorted(drinks, key=lambda d: d['name'].lower())
+
+# Filtering state
+filter_var = tk.StringVar()
+
+
+def filter_drinks(*args):
+    filter_text = filter_var.get().strip().lower()
+    # Only allow extended ASCII (0-255) in filter
+    if not all(0 <= ord(c) <= 255 for c in filter_text):
+        messagebox.showerror("Invalid Input", "Filter can only contain ASCII characters (0-255).")
+        # Remove invalid characters
+        filter_var.set(''.join([c for c in filter_text if 0 <= ord(c) <= 255]))
+        return
+    filtered = []
+    if filter_text:
+        for drink in drinks:
+            if any(filter_text in ing['name'].lower() for ing in drink['ingredients']):
+                filtered.append(drink)
+        display_list = sorted(filtered, key=lambda d: d['name'].lower())
+    else:
+        display_list = sorted(drinks, key=lambda d: d['name'].lower())
+    global drinks_sorted
+    drinks_sorted = display_list
+    drink_listbox.delete(0, tk.END)
+    for drink in drinks_sorted:
+        drink_listbox.insert(tk.END, drink['name'])
+    # Select first drink if available
+    if drinks_sorted:
+        drink_listbox.selection_set(0)
+        show_drink_details(None)
+    else:
+        ingredients_var.set("")
+        instructions_var.set("")
+
+filter_var.trace_add('write', filter_drinks)
 
 ingredients_var = tk.StringVar()
 instructions_var = tk.StringVar()
@@ -41,6 +77,13 @@ def show_drink_details(event):
     ingredients_var.set(ingredients_text)
     instructions_var.set(instructions_text)
 
+
+# Filter list
+filter_frame = tk.Frame(root)
+tk.Label(filter_frame, text="Filter by ingredient:").pack(side=tk.LEFT, padx=(0, 5))
+filter_entry = tk.Entry(filter_frame, textvariable=filter_var, width=24)
+filter_entry.pack(side=tk.LEFT)
+filter_frame.pack(anchor='w', padx=10, pady=(5, 0))
 
 drink_listbox = tk.Listbox(root, height=12, width=28, font=("Arial", 12))
 for drink in drinks_sorted:
@@ -66,13 +109,12 @@ instructions_var = tk.StringVar()
 instructions_text = ttk.Label(root, textvariable=instructions_var, font=("Arial", 11), justify='left')
 instructions_text.pack(anchor='w', padx=20, pady=(0, 10))
 
+
 # Select first drink by default
 if drinks_sorted:
     drink_listbox.selection_set(0)
     show_drink_details(None)
 
-
-# --- Add Drink Functionality ---
 
 def open_add_drink_window():
     open_drink_form_window("Add New Drink")
@@ -120,6 +162,27 @@ def open_drink_form_window(title, drink=None, edit_index=None):
         name = name_entry.get().strip()
         instructions = instructions_entry.get("1.0", tk.END).strip()
         ingredients_lines = ingredients_text.get("1.0", tk.END).strip().splitlines()
+        # Enforce extended ASCII (0-255) for all fields
+        if not all(0 <= ord(c) <= 255 for c in name):
+            messagebox.showerror("Invalid Input", "Drink name can only contain ASCII characters (0-255).")
+            return
+        if not all(0 <= ord(c) <= 255 for c in instructions):
+            messagebox.showerror("Invalid Input", "Instructions can only contain ASCII characters (0-255).")
+            return
+        for line in ingredients_lines:
+            if not line.strip():
+                continue
+            parts = line.strip().split(' ', 1)
+            if len(parts) != 2:
+                messagebox.showerror("Error", f"Invalid ingredient format: '{line}'. Use: amount ingredient")
+                return
+            amount, ing_name = parts
+            if not all(0 <= ord(c) <= 255 for c in amount):
+                messagebox.showerror("Invalid Input", f"Ingredient amount can only contain ASCII characters (0-255): '{amount}'")
+                return
+            if not all(0 <= ord(c) <= 255 for c in ing_name):
+                messagebox.showerror("Invalid Input", f"Ingredient name can only contain ASCII characters (0-255): '{ing_name}'")
+                return
         if not name or not ingredients_lines:
             messagebox.showerror("Error", "Drink name and at least one ingredient are required.")
             return
@@ -248,7 +311,7 @@ def restore_from_backup():
 
 
 def show_about():
-    messagebox.showinfo("About DrinkDB", "DrinkDB\nVersion 1.0\nA simple drink recipe manager.")
+    messagebox.showinfo("About DrinkDB", "DrinkDB\nVersion 25.8.4\nA simple drink recipe manager.")
 
 
 # Edit Drinks
@@ -262,6 +325,7 @@ drinks_menu.add_command(label="Delete Drink", command=delete_selected_drink)
 # Help
 help_menu = tk.Menu(menubar, tearoff=0)
 help_menu.add_command(label="About", command=show_about)
+
 
 # Backup Drink List
 backup_menu = tk.Menu(menubar, tearoff=0)
