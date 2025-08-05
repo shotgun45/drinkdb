@@ -1,3 +1,5 @@
+
+import os
 import json
 import tkinter as tk
 from tkinter import ttk, messagebox
@@ -7,9 +9,6 @@ from drink_utils import load_drinks
 root = tk.Tk()
 root.title("DrinkDB")
 root.geometry("1024x768")
-
-# Load drinks.json
-import os
 try:
     script_dir = os.path.dirname(os.path.abspath(__file__))
     drinks_path = os.path.join(script_dir, "drinks.json")
@@ -58,6 +57,7 @@ def filter_drinks(*args):
         ingredients_var.set("")
         instructions_var.set("")
 
+
 filter_var.trace_add('write', filter_drinks)
 
 ingredients_var = tk.StringVar()
@@ -75,6 +75,7 @@ def show_drink_details(event):
     ])
     instructions_text = drink.get('instructions', 'No instructions provided.')
     ingredients_var.set(ingredients_text)
+
     instructions_var.set(instructions_text)
 
 
