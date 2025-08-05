@@ -75,11 +75,9 @@ def show_drink_details(event):
     ])
     instructions_text = drink.get('instructions', 'No instructions provided.')
     ingredients_var.set(ingredients_text)
-
     instructions_var.set(instructions_text)
 
 
- 
 # Filter list
 filter_frame = tk.Frame(root)
 tk.Label(filter_frame, text="Filter by ingredient:").pack(side=tk.LEFT, padx=(0, 5))
