@@ -29,20 +29,20 @@
     "name": "Margarita",
     "ingredients": [
       {
-        "name": "Tequila",
-        "amount": "2 oz"
+        "name": "oz Tequila",
+        "amount": "2"
       },
       {
-        "name": "Triple Sec",
-        "amount": "1 oz"
+        "name": "oz Triple Sec",
+        "amount": "1"
       },
       {
-        "name": "Lime Juice",
-        "amount": "1 oz"
+        "name": "oz Lime Juice",
+        "amount": "1"
       },
       {
-        "name": "Salt",
-        "amount": "For rim"
+        "name": "for rim",
+        "amount": "Salt"
       }
     ],
     "instructions": "Rim glass with salt. Shake tequila, triple sec, and lime juice with ice. Strain into glass and garnish with lime."

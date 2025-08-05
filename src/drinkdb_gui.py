@@ -78,6 +78,7 @@ def show_drink_details(event):
     instructions_var.set(instructions_text)
 
 
+ 
 # Filter list
 filter_frame = tk.Frame(root)
 tk.Label(filter_frame, text="Filter by ingredient:").pack(side=tk.LEFT, padx=(0, 5))
@@ -177,12 +178,18 @@ def open_drink_form_window(title, drink=None, edit_index=None):
                 messagebox.showerror("Error", f"Invalid ingredient format: '{line}'. Use: amount ingredient")
                 return
             amount, ing_name = parts
-            if not all(0 <= ord(c) <= 255 for c in amount):
-                messagebox.showerror("Invalid Input", f"Ingredient amount can only contain ASCII characters (0-255): '{amount}'")
-                return
-            if not all(0 <= ord(c) <= 255 for c in ing_name):
-                messagebox.showerror("Invalid Input", f"Ingredient name can only contain ASCII characters (0-255): '{ing_name}'")
-                return
+        if not all(0 <= ord(c) <= 255 for c in amount):
+            messagebox.showerror(
+                "Invalid Input",
+                f"Ingredient amount can only contain ASCII characters (0-255): '{amount}'"
+            )
+            return
+        if not all(0 <= ord(c) <= 255 for c in ing_name):
+            messagebox.showerror(
+                "Invalid Input",
+                f"Ingredient name can only contain ASCII characters (0-255): '{ing_name}'"
+            )
+            return
         if not name or not ingredients_lines:
             messagebox.showerror("Error", "Drink name and at least one ingredient are required.")
             return
@@ -305,7 +312,10 @@ def restore_from_backup():
         return
     try:
         shutil.copy2(backup_file, drinks_path)
-        messagebox.showinfo("Restore Successful", f"Restored from backup:\n{backup_file}\n\nPlease restart the app to see changes.")
+        messagebox.showinfo(
+            "Restore Successful",
+            f"Restored from backup:\n{backup_file}\n\nPlease restart the app to see changes."
+        )
     except Exception as e:
         messagebox.showerror("Restore Failed", f"Could not restore drinks.json: {e}")
 
