@@ -76,6 +76,15 @@ class TestDrinkDB(unittest.TestCase):
         for drink in drinks:
             self.assertGreaterEqual(len(drink['instructions'].strip()), 5, f"Instructions for '{drink['name']}' are too short.")
 
+    def test_filter_allows_only_extended_ascii(self):
+        def is_extended_ascii(s):
+            return all(0 <= ord(c) <= 255 for c in s)
+
+        valid_ascii = ''.join(chr(i) for i in range(256))
+        self.assertTrue(is_extended_ascii(valid_ascii), "Filter should allow all extended ASCII (0-255)")
+
+        invalid = 'hello\u20ac'  # Euro sign is 8364
+        self.assertFalse(is_extended_ascii(invalid), "Filter should not allow non-ASCII (>255) characters")
 
 if __name__ == '__main__':
     unittest.main()
