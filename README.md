@@ -39,6 +39,7 @@ sudo apt-get install python3-tk (Debian/Ubuntu)
 python3 main.py
 ```
 ## Updates
+- 2025.08.05 - Create filter for cocktail list. Prevent non-ASCII character use in filter, add, and edit fields.
 - 2025.08.04 - Move backup actions to its own menu option. Made drink list larger to fill more of the screen.
 - 2025.08.03 - Prevent users from entering duplicate cocktail names.
 - 2025.08.02 - Added ability to backup and restore the cocktail data file.
